@@ -1,0 +1,43 @@
+<div class="filters">
+  <mat-form-field appearance="fill">
+    <mat-label>Sort</mat-label>
+
+    <mat-select
+      panelClass="sort-select"
+      [(ngModel)]="sort"
+      (selectionChange)="_searchGames(sort)"
+    >
+      <mat-option value="name">Name</mat-option>
+      <mat-option value="-released">Released</mat-option>
+      <mat-option value="-added">Added</mat-option>
+      <mat-option value="-created">Created</mat-option>
+      <mat-option value="-updated">Updated</mat-option>
+      <mat-option value="-rating">Rating</mat-option>
+      <mat-option value="-metacritic">Metacritic</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<div class="games">
+  <ng-container *ngFor="let game of games">
+    <div class="game" (click)="openGameDetails(game.id)">
+      <div class="game-thumb-container">
+        <img [src]="game.background_image" alt="" class="game-thumbnail" />
+        <p *ngIf="!game.background_image">No image found</p>
+      </div>
+      <div class="game-description">
+        <p class="game-name">{{ game.name }}</p>
+        <!-- <p
+          class="game-platforms"
+          *ngfor="let gamePlatform of game.parent_platforms"
+        >
+          <img
+            src="/assets/images/{{ gamePlatform.platform.slug }}.svg"
+            alt="slug"
+            class="game-platform"
+          />
+        </p> -->
+      </div>
+    </div>
+  </ng-container>
+</div>
